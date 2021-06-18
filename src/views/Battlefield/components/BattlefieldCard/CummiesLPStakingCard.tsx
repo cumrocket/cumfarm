@@ -178,7 +178,7 @@ export const CummiesLPStakingCard = () => {
           <Divider />
           
           <Heading mb="8px">
-            Your pool share percentage: {getBalanceNumber(userArmyPercent)*100}%
+            Your pool share percentage: {(getBalanceNumber(userArmyPercent)*100).toFixed(4)}%
           </Heading>
           <Button mt="8px" as="a" variant="secondary" href="https://exchange.pancakeswap.finance//#/add/0x27Ae27110350B98d564b9A3eeD31bAeBc82d878d/BNB" target="_blank">
                 Add Liquidity for CUMMIES-BNB
