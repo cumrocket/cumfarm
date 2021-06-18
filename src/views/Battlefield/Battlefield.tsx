@@ -136,7 +136,7 @@ const Battlefield: React.FC = () => {
         <Divider/>
         <FlexLayout>
           <Flex>
-            <Text>In collaboration with <Link href="https://www.knightsdefi.com">Knights Defi</Link></Text>
+            <Text>In collaboration with <Link href="https://www.knightsdefi.com" target="_blank">Knights Defi</Link></Text>
           </Flex>
         </FlexLayout>
         
