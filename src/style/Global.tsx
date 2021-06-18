@@ -28,33 +28,14 @@ const GlobalStyle = createGlobalStyle`
   div.sc-fbNXWD > * :hover {
     background: #F6F6F8 !important;
   }
-
-
-  a.sc-hOqqkJ {
-    display: none !important;
-  }
-
-  div.sc-euMpXR {
-    display: none !important;
-  }
-
-  svg.sc-bdfBwQ {
-    /*display: none !important;*/
-  }
-
-  div.sc-gsxnyZ {
+  
+  div.sc-TmcTc {
     display: none !important;
   }
   
-  div.jZkyxP {
+  div.sc-jeGSBP {
     display: none !important;
   }
-  
-  div.fJmXFJ {
-    display: none !important;
-  }
-  
-  
 `
 
 export default GlobalStyle
