@@ -24,6 +24,37 @@ const GlobalStyle = createGlobalStyle`
       max-width: 100%;
     }
   }
+
+  div.sc-fbNXWD > * :hover {
+    background: #F6F6F8 !important;
+  }
+
+
+  a.sc-hOqqkJ {
+    display: none !important;
+  }
+
+  div.sc-euMpXR {
+    display: none !important;
+  }
+
+  svg.sc-bdfBwQ {
+    /*display: none !important;*/
+  }
+
+  div.sc-gsxnyZ {
+    display: none !important;
+  }
+  
+  div.jZkyxP {
+    display: none !important;
+  }
+  
+  div.fJmXFJ {
+    display: none !important;
+  }
+  
+  
 `
 
 export default GlobalStyle
