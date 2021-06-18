@@ -47,7 +47,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
       <Flex flexDirection="column" alignItems="flex-end">
         <Heading mb="0px">{lpLabel}</Heading>
         <Text mb="0px">Rate: {rewardRate*1200} / hr.</Text>
-        <Text mb="0px">You Earn: {rewardRate*1200*(userArmyPercent.dividedBy(1e18).toNumber())} / hr.</Text>
+        <Text mb="0px">You Earn: {(rewardRate*1200*(userArmyPercent.dividedBy(1e18).toNumber())).toFixed(2)} / hr.</Text>
       </Flex>
     </Wrapper>
   )
