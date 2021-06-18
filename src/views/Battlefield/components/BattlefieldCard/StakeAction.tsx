@@ -88,7 +88,7 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
         )}
       </Flex>
       <Flex justifyContent="space-between" alignItems="center" >
-        <Text fontSize="14px"> (~${stakedBalanceFormatted})</Text>
+        <Text fontSize="14px"> CUMMIES-BNB LP</Text>
         {rawStakedBalance === 0 ? (
            <Text />
         ) : (
