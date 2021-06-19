@@ -15,17 +15,42 @@ import { useBattlefieldApprove } from 'hooks/useApprove'
 import { useShillingBnbHarvest } from 'hooks/useHarvest'
 import { getBattlefieldContract, getShillingContract } from 'utils/contractHelpers'
 import { getCakeAddress } from 'utils/addressHelpers'
-import { usePriceShillingBusd, usePriceBnbBusd,useBattlefieldUser } from 'state/hooks'
+import { usePriceShillingBusd, usePriceBnbBusd, useBattlefieldUser } from 'state/hooks'
 import StakeAction from './StakeAction'
-
 
 type State = {
   holdings: number
   bfStaking: number
 }
 
+const StyledButton = styled(Button)`
+  background-color: #32325d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6rem;
+
+  &:hover {
+    background-color: #32325d;
+  }
+`
+
+const StyledLinkButton = styled(Button)`
+  background-color: transparent;
+  margin-top: 1.5rem;
+  width: 100%;
+  border: 0;
+  color: #32325d;
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const Wrapper = styled.div`
   margin-top: 24px;
+  color: #32325d;
 `
 
 const RainbowLight = keyframes`
@@ -41,15 +66,7 @@ const RainbowLight = keyframes`
 `
 
 const StyledCardAccent = styled.div`
- background: linear-gradient(
-    -45deg,
-    #ff738e,
-    #e4536f 20%,
-    #a34054 40%,
-    #b7eaff 60%,
-    #92cee7 80%,
-    #5dc4d9 100%
-  );
+  background: linear-gradient(-45deg, #ff738e, #e4536f 20%, #a34054 40%, #b7eaff 60%, #92cee7 80%, #5dc4d9 100%);
   background-size: 300% 300%;
   animation: ${RainbowLight} 2s linear infinite;
   border-radius: 16px;
@@ -65,9 +82,9 @@ const StyledCardAccent = styled.div`
 
 const FCard = styled.div`
   align-self: baseline;
-  background: ${(props) => props.theme.card.background};
+  background: white;
   border-radius: 32px;
-  box-shadow: 0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05);
+  box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -87,50 +104,58 @@ const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-export const CummiesLPStakingCard = () => {
+const StyledHeading1 = styled(Heading)`
+  color: #32325d;
+  font-size: 32px;
+  text-align: left;
+  max-width: 300px;
+  background: linear-gradient(78.25deg, #7000e9, #ff00c5 20.93%, #ff0076 46.94%, #005ce3 92.49%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`
 
+export const CummiesLPStakingCard = () => {
   const [requestedApproval, setRequestedApproval] = useState(false)
 
-  const {allowance, tokenBalance, stakedBalance } = useBattlefieldUser(0)
-  
+  const { allowance, tokenBalance, stakedBalance } = useBattlefieldUser(0)
+
   const shillingBFRewardsPid = 0 // Change to Battlefield PID for Shilling Rewards after launch.
   const { fastRefresh, slowRefresh } = useRefresh()
-  const {userArmyStrength, userArmyPercent } = useBattlefieldUser(0)
+  const { userArmyStrength, userArmyPercent } = useBattlefieldUser(0)
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
   const web3 = useWeb3()
   const [showExpandableSection, setShowExpandableSection] = useState(false)
   const [state, setState] = useState<State>({
     holdings: 0,
-    bfStaking: 0
-    })
-  
-  
+    bfStaking: 0,
+  })
+
   useEffect(() => {
-    console.log("clean up")
+    console.log('clean up')
   }, [])
 
   useEffect(() => {
-      const fetchShillingDetails = async () => {
-        if(account){
-          let holdings = 0
-          let bfStaking = 0
-          const bfContract = getBattlefieldContract()
-          const shillContract = getShillingContract()
-          const shillBFRewardsPid = 0 // Change to Battlefield PID for Shilling Rewards after launch.
-         
-          bfStaking = await bfContract.methods.userHoldings(account, shillBFRewardsPid).call()
-          holdings = await shillContract.methods.balanceOf(account).call()
-          
-          // get BNB Claim date
+    const fetchShillingDetails = async () => {
+      if (account) {
+        let holdings = 0
+        let bfStaking = 0
+        const bfContract = getBattlefieldContract()
+        const shillContract = getShillingContract()
+        const shillBFRewardsPid = 0 // Change to Battlefield PID for Shilling Rewards after launch.
 
-          setState((prevState) => ({
-            ...prevState,
-            holdings,
-            bfStaking
-          }))
-        }
+        bfStaking = await bfContract.methods.userHoldings(account, shillBFRewardsPid).call()
+        holdings = await shillContract.methods.balanceOf(account).call()
+
+        // get BNB Claim date
+
+        setState((prevState) => ({
+          ...prevState,
+          holdings,
+          bfStaking,
+        }))
       }
+    }
     fetchShillingDetails()
   }, [slowRefresh, account, web3])
 
@@ -149,45 +174,41 @@ export const CummiesLPStakingCard = () => {
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
       <StakeAction
-            stakedBalance={stakedBalance}
-            tokenBalance={tokenBalance}
-            tokenName="CUMMIES-BNB LP"
-            pid={0}
-            addLiquidityUrl="https://exchange.pancakeswap.finance//#/add/0x27Ae27110350B98d564b9A3eeD31bAeBc82d878d/BNB"
+        stakedBalance={stakedBalance}
+        tokenBalance={tokenBalance}
+        tokenName="CUMMIES-BNB LP"
+        pid={0}
+        addLiquidityUrl="https://exchange.pancakeswap.finance//#/add/0x27Ae27110350B98d564b9A3eeD31bAeBc82d878d/BNB"
       />
     ) : (
-      <Button mt="8px" disabled={requestedApproval} onClick={handleApprove}>
+      <StyledButton mt="8px" disabled={requestedApproval} onClick={handleApprove}>
         Approve Contract
-      </Button>
+      </StyledButton>
     )
   }
 
-  if(account){
+  if (account) {
     return (
       <FCard>
         <StyledCardAccent />
-          <Heading mb="12px">
-             Stake CUMMIES-BNB V2 LP to earn CUMMIES!
-          </Heading>
-          <Heading>  <img src="images/battlefield/cumrocket.svg" alt="Shilling Logo" style={{
-              height: '48px'
-            }}/>
-          </Heading>
-          <Divider />
-          {renderApprovalOrStakeButton()}
-          <Divider />
-          
-          <Heading mb="8px">
-            Your pool share percentage: {(getBalanceNumber(userArmyPercent)*100).toFixed(4)}%
-          </Heading>
-          <Button mt="8px" as="a" variant="secondary" href="https://exchange.pancakeswap.finance//#/add/0x27Ae27110350B98d564b9A3eeD31bAeBc82d878d/BNB" target="_blank">
-                Add Liquidity for CUMMIES-BNB
-          </Button>
+        <StyledHeading1 mb="12px">Stake CUMMIES-BNB V2 LP to earn CUMMIES!</StyledHeading1>
+
+        <Divider />
+        {renderApprovalOrStakeButton()}
+        <Divider />
+
+        <Heading mb="8px">Your pool share percentage: {(getBalanceNumber(userArmyPercent) * 100).toFixed(4)}%</Heading>
+        <StyledLinkButton
+          as="a"
+          href="https://exchange.pancakeswap.finance//#/add/0x27Ae27110350B98d564b9A3eeD31bAeBc82d878d/BNB"
+          target="_blank"
+        >
+          Add Liquidity for CUMMIES-BNB
+        </StyledLinkButton>
       </FCard>
-        
     )
   }
- /*  if(!shillingLaunched){
+  /*  if(!shillingLaunched){
   return (
   <FCard>
       <StyledCardAccent />
@@ -201,17 +222,14 @@ export const CummiesLPStakingCard = () => {
   </FCard>
   )
   } */
-  
+
   return (
     <FCard>
       <StyledCardAccent />
-          <Heading mb="12px">
-            Stake CUMMIES-BNB V2 LP to earn CUMMIES!
-          </Heading>
-          <Heading mb="12px">  <img src="images/battlefield/cumrocket.svg" alt="CumRocket Logo" style={{
-              height: '48px'
-            }}/>
-          </Heading>
+      <StyledHeading1 mb="24px" className="sharp-bold">
+        Stake CUMMIES-BNB V2 LP to earn CUMMIES!
+      </StyledHeading1>
+
       <UnlockButton />
     </FCard>
   )

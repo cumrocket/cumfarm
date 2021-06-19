@@ -15,8 +15,6 @@ import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import CummiesLPStakingCard from './components/FarmCard/CummiesLPStakingCard'
-import FarmTabButtons from './components/FarmTabButtons'
-import Divider from './components/Divider'
 
 const Farms: React.FC = () => {
   const { path } = useRouteMatch()
@@ -113,9 +111,7 @@ const Farms: React.FC = () => {
           <Heading as="h1" size="xxl" mb="16px">
             Farms
           </Heading>
-          <Text>
-            Stake CUMMIES-BNB LP V2 tokens to earn CUMMIES.
-          </Text>
+          <Text>Stake CUMMIES-BNB LP V2 tokens to earn CUMMIESs.</Text>
         </div>
       </Hero>
       <div>

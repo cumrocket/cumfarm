@@ -3,9 +3,16 @@ import { Menu as UikitMenu } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { allLanguages } from 'config/localisation/languageCodes'
 import { LanguageContext } from 'contexts/Localisation/languageContext'
-import { usePriceCakeBusd, usePriceTableBusd, usePriceLegendBusd, usePriceSquireBusd, usePriceShillingBusd } from 'state/hooks'
+import {
+  usePriceCakeBusd,
+  usePriceTableBusd,
+  usePriceLegendBusd,
+  usePriceSquireBusd,
+  usePriceShillingBusd,
+} from 'state/hooks'
 import useTheme from 'hooks/useTheme'
 import config from './config'
+import LayoutHeader from 'components/LayoutHeader'
 
 const Menu = (props) => {
   const { account, connect, reset } = useWallet()
@@ -18,7 +25,7 @@ const Menu = (props) => {
   const shillingPriceUsd = usePriceShillingBusd()
 
   return (
-    <UikitMenu
+    <LayoutHeader
       account={account}
       login={connect}
       logout={reset}

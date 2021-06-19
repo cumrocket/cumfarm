@@ -81,10 +81,10 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background: ${(props) => (!props.disabled ? props.theme.card.background : `#ddd`)};
+  background: #32325d;
   border: 0;
-  border-radius: 12px;
-  color: ${(props) => (!props.disabled ? `#ccc72d` : `#acaaaf`)};
+  border-radius: 6rem;
+  color: white;
   cursor: pointer;
   display: flex;
   font-size: ${(props) => props.fontSize}px;
@@ -96,7 +96,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   padding-right: ${(props) => props.padding}px;
   pointer-events: ${(props) => (!props.disabled ? undefined : 'none')};
   width: 100%;
-  border: 2px solid ${(props) => (!props.disabled ? `#ccc72d` : `#eee`)};
   width: 100px;
   height: 30px;
   font-size: 14px;

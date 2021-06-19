@@ -9,32 +9,34 @@ import { Heading, Text, Link, Flex } from '@pancakeswap-libs/uikit'
 import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK, CAKE_POOL_PID } from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useBattlefield, usePriceBnbBusd, usePriceCakeBusd, usePriceEthBusd, usePriceLegendBusd, usePriceTableBusd, usePriceSquireBusd, usePriceShillingBusd } from 'state/hooks'
+import {
+  useBattlefield,
+  usePriceBnbBusd,
+  usePriceCakeBusd,
+  usePriceEthBusd,
+  usePriceLegendBusd,
+  usePriceTableBusd,
+  usePriceSquireBusd,
+  usePriceShillingBusd,
+} from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchBattlefieldUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
-import useTheme from 'hooks/useTheme'
 import BattlefieldCard, { BattlefieldWithStakedValue } from './components/BattlefieldCard/BattlefieldCard'
-import {CummiesLPStakingCard} from './components/BattlefieldCard/CummiesLPStakingCard'
-import { ShillingRewardsCard } from './components/BattlefieldCard/ShillingRewardsCard'
-import BattlefieldOverview from './components/BattlefieldCard/BattlefieldOverview'
+import { CummiesLPStakingCard } from './components/BattlefieldCard/CummiesLPStakingCard'
 import Divider from './components/Divider'
-import AllAction from './components/AllAction'
 
-
-const AddressLink = styled(Link)`
+const CollabLink = styled(Link)`
+  color: #32325d;
   display: inline-block;
-  font-weight: 400;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 80px;
-  white-space: nowrap;
+  font-size: 13px;
+  text-align: center;
+`
 
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 16px;
-    width: auto;
-  }
+const CollabText = styled(Text)`
+  font-size: 13px;
+  text-align: center;
+  margin: 0 auto;
 `
 
 const Battlefield: React.FC = () => {
@@ -57,10 +59,10 @@ const Battlefield: React.FC = () => {
   }, [account, dispatch, fastRefresh])
 
   const [stackedOnly, setStackedOnly] = useState(false)
-  
+
   const Action = styled.div`
-  padding-top: 16px;
-`
+    padding-top: 16px;
+  `
 
   const activeBattlefields = battlefieldLP.filter((battlefield) => battlefield.visible === true)
 
@@ -69,7 +71,9 @@ const Battlefield: React.FC = () => {
   // to retrieve assets prices against USD
   const battlefieldList = useCallback(
     (battlefieldToDisplay, removed: boolean) => {
-      const cakePriceVsBNB = new BigNumber(battlefieldLP.find((battlefield) => battlefield.pid === CAKE_POOL_PID)?.tokenPriceVsQuote || 0)
+      const cakePriceVsBNB = new BigNumber(
+        battlefieldLP.find((battlefield) => battlefield.pid === CAKE_POOL_PID)?.tokenPriceVsQuote || 0,
+      )
       const battlefieldToDisplayWithAPY: BattlefieldWithStakedValue[] = battlefieldToDisplay.map((battlefield) => {
         if (!battlefield.tokenAmount || !battlefield.lpTotalInQuoteToken || !battlefield.lpTotalInQuoteToken) {
           return battlefield
@@ -90,7 +94,8 @@ const Battlefield: React.FC = () => {
           apy = cakeRewardPerYear.div(battlefield.lpTotalInQuoteToken)
         } else if (battlefield.dual) {
           const cakeApy =
-            battlefield && cakePriceVsBNB.times(cakeRewardPerBlock).times(BLOCKS_PER_YEAR).div(battlefield.lpTotalInQuoteToken)
+            battlefield &&
+            cakePriceVsBNB.times(cakeRewardPerBlock).times(BLOCKS_PER_YEAR).div(battlefield.lpTotalInQuoteToken)
           const dualApy =
             battlefield.tokenPriceVsQuote &&
             new BigNumber(battlefield.tokenPriceVsQuote)
@@ -120,26 +125,38 @@ const Battlefield: React.FC = () => {
         />
       ))
     },
-    [battlefieldLP, bnbPrice, legendPrice, tablePrice, squirePrice, shillingPrice, ethPriceUsd, cakePrice, ethereum, account],
+    [
+      battlefieldLP,
+      bnbPrice,
+      legendPrice,
+      tablePrice,
+      squirePrice,
+      shillingPrice,
+      ethPriceUsd,
+      cakePrice,
+      ethereum,
+      account,
+    ],
   )
 
   return (
     <Page>
       <Hero>
-          <CummiesLPStakingCard />
+        <CummiesLPStakingCard />
       </Hero>
-      
+
       <div>
-        <FlexLayout>
-            {battlefieldList(activeBattlefields, true)}
-        </FlexLayout>
-        <Divider/>
+        <FlexLayout>{battlefieldList(activeBattlefields, true)}</FlexLayout>
         <FlexLayout>
           <Flex>
-            <Text>In collaboration with <Link href="https://www.knightsdefi.com" target="_blank">Knights Defi</Link></Text>
+            <CollabText>
+              In collaboration with{' '}
+              <CollabLink href="https://www.knightsdefi.com" target="_blank">
+                Knights Defi
+              </CollabLink>
+            </CollabText>
           </Flex>
         </FlexLayout>
-        
       </div>
     </Page>
   )
