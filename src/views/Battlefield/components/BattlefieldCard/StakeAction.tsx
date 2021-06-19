@@ -29,7 +29,7 @@ const IconButtonWrapper = styled.div`
 `
 
 const StyledText = styled(Text)`
-  color: white;
+  color: #ffffff !important;
   font-size: 14px;
   font-weight: 600;
 `
@@ -106,7 +106,9 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
         ) : (
           <Flex mb="2px">
             <HarvestButton variant="tertiary" onClick={onPresentWithdraw}>
-              <StyledText fontSize="14px">Unstake (-)</StyledText>
+              <StyledText fontSize="14px" color="#ffffff" fontWeight="600">
+                Unstake (-)
+              </StyledText>
             </HarvestButton>
           </Flex>
         )}
