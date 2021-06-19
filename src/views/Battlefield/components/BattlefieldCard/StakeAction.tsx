@@ -28,6 +28,12 @@ const IconButtonWrapper = styled.div`
   }
 `
 
+const StyledText = styled(Text)`
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+`
+
 const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
   stakedBalance,
   tokenBalance,
@@ -79,16 +85,16 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
         <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance}</Heading>
         {rawStakedBalance === 0 ? (
           <HarvestButton onClick={onPresentDeposit}>
-            <Text fontSize="14px" color="#ffffff" fontWeight="600">
+            <StyledText fontSize="14px" color="#ffffff" fontWeight="600">
               Stake (+)
-            </Text>
+            </StyledText>
           </HarvestButton>
         ) : (
           <Flex mb="2px">
             <HarvestButton variant="tertiary" onClick={onPresentDeposit}>
-              <Text fontSize="14px" color="#ffffff" fontWeight="600">
+              <StyledText fontSize="14px" color="#ffffff" fontWeight="600">
                 Stake (+)
-              </Text>
+              </StyledText>
             </HarvestButton>
           </Flex>
         )}
@@ -100,7 +106,7 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
         ) : (
           <Flex mb="2px">
             <HarvestButton variant="tertiary" onClick={onPresentWithdraw}>
-              <Text fontSize="14px">Unstake (-)</Text>
+              <StyledText fontSize="14px">Unstake (-)</StyledText>
             </HarvestButton>
           </Flex>
         )}

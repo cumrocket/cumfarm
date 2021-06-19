@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
 import { Button, Modal } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
-import {BattlefieldModalInput} from 'components/ModalInput'
+import { BattlefieldModalInput } from 'components/ModalInput'
 import useI18n from 'hooks/useI18n'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 
@@ -33,17 +33,17 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
   }, [fullBalance, setVal])
 
   return (
-    <Modal title={TranslateString(1126, 'Recall Troops')} onDismiss={onDismiss}>
+    <Modal title={TranslateString(1126, 'Unstake CUMMIES')} onDismiss={onDismiss}>
       <BattlefieldModalInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         value={val}
         max={fullBalance}
         symbol={tokenName}
-        inputTitle={TranslateString(588, 'Recall Troops')}
+        inputTitle={TranslateString(588, 'Unstake CUMMIES')}
       />
       <ModalActions>
-        <Button variant="secondary" onClick={onDismiss} >
+        <Button variant="secondary" onClick={onDismiss}>
           {TranslateString(462, 'Cancel')}
         </Button>
         <Button
@@ -54,7 +54,6 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
             setPendingTx(false)
             onDismiss()
           }}
-          
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
         </Button>
