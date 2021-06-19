@@ -36,10 +36,12 @@ body {
   font-family: 'SharpSans-Bold' !important;
   box-shadow: 0px 5px 35px rgba(49, 7, 23, 0.1) !important;
   font-size: 14px !important;
+  color: white !important;
 }
 
 .sc-hzMMCg:last-child .sc-dlfnbm:disabled {
   background-color: #e6e6ec !important;
+  color: #90909e !important;
 }
 
 .sc-hzMMCg > .sc-dlfnbm {
@@ -69,6 +71,10 @@ body {
   border-color: #32325d !important;
   box-shadow: 0px 5px 35px rgba(49, 7, 23, 0.1) !important;
   font-size: 14px !important;
+}
+
+.sc-eHfQar > .sc-hzMMCg:last-child > .sc-dlfnbm {
+  color: white;
 }
 
 .sc-eHfQar > .sc-hzMMCg:last-child {
