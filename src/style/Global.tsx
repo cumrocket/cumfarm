@@ -8,25 +8,32 @@ declare module 'styled-components' {
 }
 
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'SharpSans-Bold';
+    src: url('/fonts/SharpSans-Bold.woff');
+  }
+
+  @font-face {
+    font-family: 'SharpSans-Semibold';
+    src: url('/fonts/SharpSans-Semibold.woff');
+  }
+
   * {
     font-family: 'Poppins', sans-serif;
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.background};
-    background-image: url('./images/arch-light.svg');
+    background-color: #ffffff;
+    background-image: url('/images/cumrocket-bg.jpg');
     background-repeat: no-repeat;
-    background-position: bottom;
     background-size: contain;
+    font-family: 'SharpSans-Bold', sans-serif;
+    color: #32325D !important;
 
     img {
       height: auto;
       max-width: 100%;
     }
-  }
-
-  div.sc-fbNXWD > * :hover {
-    background: #F6F6F8 !important;
   }
   
   div.sc-TmcTc {
@@ -35,6 +42,19 @@ const GlobalStyle = createGlobalStyle`
   
   div.sc-jeGSBP {
     display: none !important;
+  }
+  
+  .jBnkLM, .eTpGBT  {
+    color: #32325d !important;
+  }
+
+  .Avtah {
+    color: #5f7888;
+    font-size: 12px;
+  }
+  
+  .jiDKKS, .bEGajC {
+    fill: #32325d !important;
   }
 `
 

@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal, Text } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
-import {useBattlefieldStake} from 'hooks/useStake'
-import {useBattlefieldUnstake} from 'hooks/useUnstake'
-import {useBattlefieldCompound} from 'hooks/useCompound'
+import { useBattlefieldStake } from 'hooks/useStake'
+import { useBattlefieldUnstake } from 'hooks/useUnstake'
+import { useBattlefieldCompound } from 'hooks/useCompound'
 import { getBalanceNumber } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
@@ -34,7 +34,7 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
   tokenName,
   pid,
   addLiquidityUrl,
-  stakedBalanceFormatted
+  stakedBalanceFormatted,
 }) => {
   const TranslateString = useI18n()
   const { onStake } = useBattlefieldStake(pid)
@@ -44,23 +44,23 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
   const rawStakedBalance = getBalanceNumber(stakedBalance)
 
   let precision = 0
-  if(rawStakedBalance < 1000 && rawStakedBalance >= 100){
+  if (rawStakedBalance < 1000 && rawStakedBalance >= 100) {
     precision = 2
   }
-  if(rawStakedBalance < 100 && rawStakedBalance >= 1){
+  if (rawStakedBalance < 100 && rawStakedBalance >= 1) {
     precision = 3
   }
-  if(rawStakedBalance < 1 && rawStakedBalance >= .01){
+  if (rawStakedBalance < 1 && rawStakedBalance >= 0.01) {
     precision = 5
   }
-  if(rawStakedBalance < .01 && rawStakedBalance >= 0){
+  if (rawStakedBalance < 0.01 && rawStakedBalance >= 0) {
     precision = 6
-  } 
-  if(rawStakedBalance === 0){
-      precision = 0
+  }
+  if (rawStakedBalance === 0) {
+    precision = 0
   }
 
-  const displayBalance =  new BigNumber(rawStakedBalance.toFixed(precision)).toNumber().toLocaleString()
+  const displayBalance = new BigNumber(rawStakedBalance.toFixed(precision)).toNumber().toLocaleString()
 
   const [onPresentDeposit] = useModal(
     <DepositModal max={tokenBalance} onConfirm={onStake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl} />,
@@ -78,27 +78,32 @@ const StakeAction: React.FC<BattlefieldCardActionsProps> = ({
       <Flex justifyContent="space-between" alignItems="center">
         <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance}</Heading>
         {rawStakedBalance === 0 ? (
-           <HarvestButton onClick={onPresentDeposit}><Text fontSize="14px">Stake (+)</Text></HarvestButton>
+          <HarvestButton onClick={onPresentDeposit}>
+            <Text fontSize="14px" color="#ffffff" fontWeight="600">
+              Stake (+)
+            </Text>
+          </HarvestButton>
         ) : (
           <Flex mb="2px">
-              <HarvestButton variant="tertiary" onClick={onPresentDeposit}>
-                <Text fontSize="14px">Stake (+)</Text>
-              </HarvestButton>
+            <HarvestButton variant="tertiary" onClick={onPresentDeposit}>
+              <Text fontSize="14px" color="#ffffff" fontWeight="600">
+                Stake (+)
+              </Text>
+            </HarvestButton>
           </Flex>
         )}
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center" >
+      <Flex justifyContent="space-between" alignItems="center">
         <Text fontSize="14px"> CUMMIES-BNB LP</Text>
         {rawStakedBalance === 0 ? (
-           <Text />
+          <Text />
         ) : (
           <Flex mb="2px">
-              <HarvestButton variant="tertiary" onClick={onPresentWithdraw}>
-                <Text fontSize="14px">Unstake (-)</Text>
-          </HarvestButton>
+            <HarvestButton variant="tertiary" onClick={onPresentWithdraw}>
+              <Text fontSize="14px">Unstake (-)</Text>
+            </HarvestButton>
           </Flex>
         )}
-        
       </Flex>
     </Heading>
   )
