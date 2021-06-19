@@ -18,7 +18,7 @@ const NotFound = () => {
   return (
     <Page>
       <StyledNotFound>
-        <img src="/images/knight.png" width="64px" alt="logo" />
+        <img src="/images/logo.png" width="64px" alt="logo" />
         <Heading size="xxl">404</Heading>
         <Text mb="16px">{TranslateString(1122, 'Oops, knight not found.')}</Text>
         <Button as="a" href="/" size="sm">
