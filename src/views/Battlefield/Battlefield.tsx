@@ -64,6 +64,29 @@ const Battlefield: React.FC = () => {
     padding-top: 16px;
   `
 
+  const StyledLink = styled(Link)`
+    display: inline;
+    color: ${({ theme }) => theme.colors.failure};
+  `
+
+  const FooterNav = styled.ul`
+    display: flex;
+    flex-direction: row;
+  `
+
+  const FooterNavItem = styled.div`
+    padding: 1rem 0.8rem;
+    font-size: 14px;
+  `
+
+  const FooterNavItemLink = styled.a`
+    color: #e2659d;
+
+    &:hover {
+      color: #d4558e;
+    }
+  `
+
   const activeBattlefields = battlefieldLP.filter((battlefield) => battlefield.visible === true)
 
   // /!\ This function will be removed soon
@@ -147,8 +170,50 @@ const Battlefield: React.FC = () => {
 
       <div>
         <FlexLayout>{battlefieldList(activeBattlefields, true)}</FlexLayout>
-        <FlexLayout>
-          <Flex>
+        <FlexLayout style={{ flexDirection: 'column', textAlign: 'center', margin: '0 auto', width: '100%' }}>
+          <Flex style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 auto' }}>
+            <FooterNav className="footer-wrap">
+              <FooterNavItem>
+                <FooterNavItemLink className="sharp-bold footer-link" href="https://cumrocket.io/" target="_blank">
+                  Website
+                </FooterNavItemLink>
+              </FooterNavItem>
+              <FooterNavItem>
+                <FooterNavItemLink className="sharp-bold footer-link" href="https://t.me/cumrocket" target="_blank">
+                  Telegram
+                </FooterNavItemLink>
+              </FooterNavItem>
+              <FooterNavItem>
+                <FooterNavItemLink
+                  className="sharp-bold footer-link"
+                  href="https://discord.com/invite/cummies"
+                  target="_blank"
+                >
+                  Discord
+                </FooterNavItemLink>
+              </FooterNavItem>
+              <FooterNavItem>
+                <FooterNavItemLink
+                  className="sharp-bold footer-link"
+                  href="https://twitter.com/CumRocketCrypto"
+                  target="_blank"
+                >
+                  Twitter
+                </FooterNavItemLink>
+              </FooterNavItem>
+              <FooterNavItem>
+                <FooterNavItemLink
+                  className="sharp-bold footer-link"
+                  href="https://poocoin.app/tokens/0x27ae27110350b98d564b9a3eed31baebc82d878d"
+                  target="_blank"
+                >
+                  Chart
+                </FooterNavItemLink>
+              </FooterNavItem>
+            </FooterNav>
+            <img className="footer-logo" alt="CumRocket" src="/images/battlefield/cumrocket.svg" />
+          </Flex>
+          <Flex style={{ margin: '1rem auto' }}>
             <CollabText>
               In collaboration with{' '}
               <CollabLink href="https://www.knightsdefi.com" target="_blank">

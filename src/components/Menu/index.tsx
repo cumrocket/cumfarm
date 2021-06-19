@@ -11,8 +11,8 @@ import {
   usePriceShillingBusd,
 } from 'state/hooks'
 import useTheme from 'hooks/useTheme'
-import config from './config'
 import LayoutHeader from 'components/LayoutHeader'
+import config from './config'
 
 const Menu = (props) => {
   const { account, connect, reset } = useWallet()
