@@ -44,16 +44,16 @@ const GlobalStyle = createGlobalStyle`
     display: none !important;
   }
   
-  .jBnkLM, .eTpGBT  {
-    color: #32325d !important;
+   .sc-gsTCUz  {
+    color: #32325d;
   }
 
-  .Avtah {
+  .sc-bYEvPH {
     color: #5f7888;
     font-size: 12px;
   }
   
-  .jiDKKS, .bEGajC {
+  .sc-bdfBwQ, .bEGajC {
     fill: #32325d !important;
   }
 `
