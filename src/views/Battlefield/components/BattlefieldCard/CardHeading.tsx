@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Tag, Flex, Heading, Image, Text} from '@pancakeswap-libs/uikit'
+import { Tag, Flex, Heading, Image, Text } from '@pancakeswap-libs/uikit'
 import { CommunityTag, CoreTag } from 'components/Tags'
 
 export interface ExpandableSectionProps {
@@ -11,9 +11,9 @@ export interface ExpandableSectionProps {
   battlefieldImage?: string
   tokenSymbol?: string
   burnPct?: number
-  rewardPoolPct?:number
-  externalFeePct?:number
-  rewardRate?:number
+  rewardPoolPct?: number
+  externalFeePct?: number
+  rewardRate?: number
   earnedValue?: BigNumber
   userArmyPercent?: BigNumber
 }
@@ -22,6 +22,13 @@ const Wrapper = styled(Flex)`
   svg {
     margin-right: 0.25rem;
   }
+`
+
+const StyledHeading = styled(Heading)`
+  color: #32325d !important;
+`
+const StyledText = styled(Text)`
+  color: #32325d !important;
 `
 
 const MultiplierTag = styled(Tag)`
@@ -39,15 +46,17 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
   externalFeePct,
   rewardRate,
   earnedValue,
-  userArmyPercent
+  userArmyPercent,
 }) => {
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
       <Image src={`/images/battlefield/${battlefieldImage}.png`} alt={tokenSymbol} width={64} height={64} />
       <Flex flexDirection="column" alignItems="flex-end">
-        <Heading mb="0px">{lpLabel}</Heading>
-        <Text mb="0px">Rate: {rewardRate*1200} / hr.</Text>
-        <Text mb="0px">You Earn: {(rewardRate*1200*(userArmyPercent.dividedBy(1e18).toNumber())).toFixed(2)} / hr.</Text>
+        <StyledHeading mb="0px">{lpLabel}</StyledHeading>
+        <StyledText mb="0px">Rate: {rewardRate * 1200} / hr.</StyledText>
+        <StyledText mb="0px">
+          You Earn: {(rewardRate * 1200 * userArmyPercent.dividedBy(1e18).toNumber()).toFixed(2)} / hr.
+        </StyledText>
       </Flex>
     </Wrapper>
   )
