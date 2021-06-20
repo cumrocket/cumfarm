@@ -16,9 +16,6 @@ import TwitterCard from './components/TwitterCard'
 import TwitterCardDark from './components/TwitterCardDark'
 import EarnAPYCard from './components/EarnAPYCard'
 
-
-
-
 const Hero = styled.div`
   align-items: center;
   background-repeat: no-repeat;
@@ -72,19 +69,18 @@ const FatText = styled(Text)`
 `
 
 const Home: React.FC = () => {
-  const { isDark } = useTheme();
-  
+  const { isDark } = useTheme()
 
   return (
     <Page>
       <Hero>
         <FatHeading as="h1" size="xl" mb="50px" color="primary">
           {/* TranslateString(576, 'Knights of the Round Table') */}
-          Knights of the Round Table DeFi
+          Stake BNB-CUMMIES LP to earn CUMMIES on Binance Smart Chan (BSC)
         </FatHeading>
         <FatText>
           {/* TranslateString(578, 'A new approach to DeFi with Integrity.') */}
-          A new approach to DeFi with Integrity and Honor.
+          {/* A new approach to DeFi with Integrity and Honor. */}
         </FatText>
       </Hero>
       <Cards>
@@ -104,7 +100,6 @@ const Home: React.FC = () => {
         <Text>Donate to Community Fund - BSC: 0x97e09Ed54d038295a8D6e6e77524328d7d9D3fca</Text>
         <Text>Donate to Sir Tris - BSC / ETH: 0xb017c481575318017DC2122b59759B25d21f6721</Text>
       </Hero>
-        
     </Page>
   )
 }
